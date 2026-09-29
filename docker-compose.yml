@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  aula_nginx:
+    build: .
+    container_name: aula_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80" 
+    depends_on:
+      - node-app
+
+ 
+  # Seu Backend Node.js
+  node-app:
+    build:
+      context: ./backend # Ajuste para a pasta do seu código Node, se estiver separado
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOST=db
+    depends_on:
+      - db
+ 
+  # Banco de Dados MySQL
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: passTcc
+      MYSQL_DATABASE: comuna
+      MYSQL_USER: user_tcc
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+ 
+volumes:
+  mysql_data:
