@@ -14,7 +14,7 @@ services:
   # Seu Backend Node.js
   node-app:
     build:
-      context: ./backend # Ajuste para a pasta do seu código Node, se estiver separado
+      context: ./
       dockerfile: Dockerfile
     environment:
       - DB_HOST=db
