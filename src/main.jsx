@@ -1,17 +1,17 @@
 import "./style.css"
 
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter , Route , Routes} from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
 
-import Home  from './pages/Home/Home'
-import Local  from './pages/Local/Local'
-import Noticia from './pages/Noticia/Noticia'
-import Historia from './pages/Historia/quem-somos'
-import Cadastro from './pages/Cadastro/Cadastro'
-import CadastroProjeto from './pages/CadastroProjeto/CadastroProjeto'
+import Home  from './pages/Home/Home';
+import Local  from './pages/Local/Local';
+import Noticia from './pages/Noticia/Noticia';
+import Historia from './pages/Historia/quem-somos';
+import Cadastro from './pages/Cadastro/Cadastro';
+import CadastroProjeto from './pages/CadastroProjeto/CadastroProjeto';
 import Dashboard from "./pages/DashBoard/DashBoard";
 import Login from './pages/Login/Login'
 import Navbar from "./components/NavBar/Navbar";

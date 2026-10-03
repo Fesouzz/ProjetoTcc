@@ -13,7 +13,7 @@
 
 /* HERO */
 .hero {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 30px auto 40px;
   padding: 0 24px;
 }
@@ -22,7 +22,7 @@
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-  min-height: 460px;
+  min-height: 550px;
   display: flex;
   align-items: flex-end;
 }
