@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from  "react-router-dom";
-import { Navigate } from "react-router-dom";
+
 import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext(null);
@@ -51,24 +51,3 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-function RotaProtegida({ children, apenasAdmin = false }) {
-  const { user, carregando } = useAuth();
-
-  if (carregando) {
-    return <p>Carregando...</p>; 
-  }
-
-  if (!user) {
-    alert("Você precisa estar cadastrado")
-    return <Navigate to="/Login" />;
-  }
-
-  if (apenasAdmin && user.tipo_acesso !== "admin") {
-    return <Navigate to="/" />;
-  }
-
-  return children;
-}
-
-
-export default RotaProtegida; 

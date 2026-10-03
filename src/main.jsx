@@ -16,7 +16,8 @@ import Dashboard from "./pages/DashBoard/DashBoard";
 import Login from './pages/Login/Login'
 import Navbar from "./components/NavBar/Navbar";
 import Footer from "./components/Footer/Footer";
-import RotaProtegida from "./context/AuthContext";
+import RotaPublica from "./components/RotaPublica/RotaPublica";
+import RotaProtegida from "./components/RotaProtegida/RotaProtegida";
 
 
 
@@ -29,9 +30,22 @@ createRoot(document.getElementById('root')).render(
       <Route path='/' element={<Home/>}/>
       <Route path='/Local' element={<Local/>}/>
       <Route path='/Noticia' element={<Noticia/>}/>
-      <Route path='/Login' element={<Login/>}/>
+      
+      <Route path='/Login' element={
+        <RotaPublica>
+          <Login/>
+        </RotaPublica>
+      }/>
+
+
       <Route path='/Historia' element={<Historia/>}/>
-      <Route path="/Cadastro" element={<Cadastro />} />
+      <Route path="/Cadastro" element={
+        <RotaPublica>
+          <Cadastro />
+        </RotaPublica>
+        } />
+
+
       <Route path="/CadastroProjeto" element={
         <RotaProtegida>
           <CadastroProjeto/>
