@@ -2,6 +2,7 @@
    O restante (glass-box, input-wrapper, btn-primary etc.) vem do Login.css */
 
 /* Nome e sobrenome lado a lado */
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -39,7 +40,8 @@
 
 /* A caixa fica um pouco mais larga para caber os dois campos lado a lado */
 #cadastroBox.login-size {
-    max-width: 480px;
+    min-width: 350px;
+    max-width: 700px;
 }
 
 /* Em telas pequenas, nome e sobrenome empilham */

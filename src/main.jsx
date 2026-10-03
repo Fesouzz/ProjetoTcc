@@ -28,13 +28,13 @@ createRoot(document.getElementById('root')).render(
       <Route path='/Noticia' element={<Noticia/>}/>
       <Route path='/Login' element={<Login/>}/>
       <Route path='/Historia' element={<Historia/>}/>
-      <Route path="/Cadastro" element={<Cadastro />} />
+      <Route path="/Cadastro" element={<Cadastro/>} />
       <Route path="/CadastroProjeto" element={<CadastroProjeto/>} />
       <Route path="/DashBoard" element={<Dashboard/>}/>
     </Routes>
     <Footer/>
-
     </AuthProvider>
+
   </BrowserRouter>,
 
 )
