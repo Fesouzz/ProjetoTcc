@@ -36,7 +36,7 @@ function Login() {
         return;
       }
 
-      login(data.dados);
+      login(data.token);
       navigate("/");
       // redirecionar ou salvar o usuário no estado global aqui
 
@@ -102,7 +102,7 @@ function Login() {
           </p>
 
           <Link to="/" className="voltar">
-            <i className="fas fa-arrow-left"></i>Voltar para o Início
+            Voltar para o Início
           </Link>
         </div>
       </div>

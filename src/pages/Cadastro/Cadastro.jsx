@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/logo-comuna-esportes.png";
 import './CadastroStyle.css';
 
@@ -16,10 +17,10 @@ export default function Cadastro() {
   const [dt_nasc, setDt_nasc] = useState("");
   const [telefone, setTelefone] = useState("");
 
-  
+
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erro, setErro] = useState("");
-
+  const { login } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -66,8 +67,8 @@ export default function Cadastro() {
       navigate("/");
 
 
-    } catch (err) {
-      console.error(err);
+    } catch (erro) {
+      cosole.error(erro);
       setErro("Erro ao conectar com o servidor");
     }
   };

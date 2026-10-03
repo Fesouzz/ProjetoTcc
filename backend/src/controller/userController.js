@@ -1,12 +1,12 @@
 const db = require("../config/pool.js"); // Garanta que o caminho aponta para o seu arquivo de Pool do mysql2
-
+const jwt = require("jsonwebtoken");
 // =========================================================================
 // 1. LISTAR TODOS OS USUÁRIOS ATIVOS (GET)
 // =========================================================================
 const ListarUsuarios = async (req, res) => {
     try {
         const [rows] = await db.query(
-            "SELECT id, nome, email, telefone, endereco, tipo_acesso FROM cadusers "
+            "SELECT id, nome, email, telefone, endereco, dt_nasc, tipo_acesso FROM cadusers "
         );
         res.status(200).json({
             sucesso: true,
@@ -51,10 +51,10 @@ const adicionarUsuario = async (req, res) => {
 // =========================================================================
 const efetuarLogin = async (req, res) => {
     try {
-        const { nome , email, senha } = req.body;
+        const { email, senha } = req.body;
 
-        if (nome ||!email || !senha) {
-            return res.status(400).json({ sucesso: false, mensagem: "Nome, e-mail e senha são obrigatórios." });
+        if (!email || !senha) {
+            return res.status(400).json({ sucesso: false, mensagem: "E-mail e senha são obrigatórios." });
         }
 
         // Busca na tabela 'cadusers' que criamos no seu MySQL
@@ -74,17 +74,24 @@ const efetuarLogin = async (req, res) => {
         if (usuario.senha !== senha) {
             return res.status(401).json({ sucesso: false, mensagem: "Senha incorreta." });
         }
-
-        res.status(200).json({
-            sucesso: true,
-            mensagem: "Autenticação efetuada com sucesso!",
-            dados: {
+       const token = jwt.sign(
+            {
                 id: usuario.id,
                 nome: usuario.nome,
                 email: usuario.email,
                 tipo_acesso: usuario.tipo_acesso
-            }
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: "2h" } 
+        );
+
+        res.status(200).json({
+            sucesso: true,
+            mensagem: "Autenticação efetuada com sucesso!",
+            token 
         });
+
+
     } catch (error) {
         res.status(500).json({ sucesso: false, mensagem: "Erro interno de autenticação", erro: error.message });
     }

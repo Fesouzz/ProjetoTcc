@@ -14,13 +14,10 @@ export default function Navbar() {
   const estaNoCadastro = pathname === "/Cadastro";
   const estaNoForms = pathname === "/cadastroProjeto";
 
-
-  const iniciais = user?.nome
-    ?.split(" ")
-    .map((parte) => parte[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+  const partes = user?.nome?.trim().split(" ") || [];
+  const iniciais = partes.length > 1
+    ? (partes[0][0] + partes[partes.length - 1][0]).toUpperCase()
+    : partes[0]?.substring(0, 2).toUpperCase();
 
   return (
     <header>
@@ -149,7 +146,7 @@ export default function Navbar() {
           <li className="nav-item">
             <Link to="/Historia" className="nav-link">Quem somos</Link>
           </li>
-          
+
           {ehAdmin && (
             <li className="nav-item">
               <Link to="/DashBoard" className="nav-link">Painel</Link>
