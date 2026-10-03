@@ -16,6 +16,9 @@ import Dashboard from "./pages/DashBoard/DashBoard";
 import Login from './pages/Login/Login'
 import Navbar from "./components/NavBar/Navbar";
 import Footer from "./components/Footer/Footer";
+import RotaProtegida from "./context/AuthContext";
+
+
 
 createRoot(document.getElementById('root')).render(
 
@@ -28,9 +31,18 @@ createRoot(document.getElementById('root')).render(
       <Route path='/Noticia' element={<Noticia/>}/>
       <Route path='/Login' element={<Login/>}/>
       <Route path='/Historia' element={<Historia/>}/>
-      <Route path="/Cadastro" element={<Cadastro/>} />
-      <Route path="/CadastroProjeto" element={<CadastroProjeto/>} />
-      <Route path="/DashBoard" element={<Dashboard/>}/>
+      <Route path="/Cadastro" element={<Cadastro />} />
+      <Route path="/CadastroProjeto" element={
+        <RotaProtegida>
+          <CadastroProjeto/>
+        </RotaProtegida>
+        } />
+      <Route path="/DashBoard" element={
+        <RotaProtegida apenasAdmin={true}>
+          <Dashboard/>
+        </RotaProtegida>
+
+      }/>
     </Routes>
     <Footer/>
     </AuthProvider>

@@ -23,7 +23,7 @@ const ListarUsuarios = async (req, res) => {
 // =========================================================================
 const adicionarUsuario = async (req, res) => {
     try {
-        const { nome, email, telefone, endereco, dt_nasc, senha, tipo_acesso } = req.body;
+        const { nome, email, telefone, endereco, dt_nasc, senha,  tipo_acesso } = req.body;
 
         if (!nome || !email || !telefone || !endereco || !dt_nasc || !senha) {
             return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos obrigatórios." });
@@ -51,16 +51,18 @@ const adicionarUsuario = async (req, res) => {
 // =========================================================================
 const efetuarLogin = async (req, res) => {
     try {
-        const { email, senha } = req.body;
+        const { nome , email, senha } = req.body;
 
-        if (!email || !senha) {
-            return res.status(400).json({ sucesso: false, mensagem: "E-mail e senha são obrigatórios." });
+        if (nome ||!email || !senha) {
+            return res.status(400).json({ sucesso: false, mensagem: "Nome, e-mail e senha são obrigatórios." });
         }
 
         // Busca na tabela 'cadusers' que criamos no seu MySQL
         const [linhas] = await db.query(
             "SELECT id, nome, email, senha, tipo_acesso FROM cadusers  WHERE email = ?",
             [email]
+            
+
         );
 
         if (linhas.length === 0) {
@@ -68,15 +70,6 @@ const efetuarLogin = async (req, res) => {
         }
 
         const usuario = linhas[0];
-
-
-        console.log("Linhas retornadas:", JSON.stringify(linhas));
-        
-        console.log("Do banco:", JSON.stringify(usuario.senha));
-        console.log("Digitado:", JSON.stringify(senha));
-        console.log("Email recebido:", JSON.stringify(email));
-        console.log("Do banco:", JSON.stringify(usuario.senha));
-        console.log("Digitado:", JSON.stringify(senha));
 
         if (usuario.senha !== senha) {
             return res.status(401).json({ sucesso: false, mensagem: "Senha incorreta." });

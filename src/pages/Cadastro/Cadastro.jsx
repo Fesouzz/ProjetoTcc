@@ -14,11 +14,16 @@ export default function Cadastro() {
   const [senha, setSenha] = useState("");
   const [endereco, setEndereco] = useState("");
   const [dt_nasc, setDt_nasc] = useState("");
+  const [telefone, setTelefone] = useState("");
+
+  
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erro, setErro] = useState("");
 
-  function handleSubmit(e) {
+
+  async function handleSubmit(e) {
     e.preventDefault();
+    setErro("");
 
     if (senha.length < 6) {
       setErro("A senha precisa ter pelo menos 6 caracteres.");
@@ -30,14 +35,44 @@ export default function Cadastro() {
       return;
     }
 
-    setErro("");
 
-    // TODO: enviar os dados para a sua API
-    // await fetch("/api/cadastro", { method: "POST", body: JSON.stringify({ nome, sobrenome, email, senha }) })
     console.log({ nome, sobrenome, email });
 
-    navigate("/Login");
-  }
+
+    try {
+      const nomeCompleto = `${nome} ${sobrenome}`.trim();
+
+      const res = await fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: nomeCompleto,
+          email,
+          telefone,
+          endereco,
+          dt_nasc,
+          senha,
+
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.sucesso) {
+        setErro(data.mensagem);
+        return;
+      }
+      login(data.dados);
+      navigate("/");
+
+
+    } catch (err) {
+      console.error(err);
+      setErro("Erro ao conectar com o servidor");
+    }
+  };
+
+
 
   return (
     <>
@@ -91,10 +126,28 @@ export default function Cadastro() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
+
               </div>
             </div>
 
-            
+
+            <div className="form-group">
+              <label htmlFor="email">Telefone</label>
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  id="telefone"
+                  placeholder="99999-9999"
+                  value={telefone}
+                  onChange={(e) => setTelefone(e.target.value)}
+                  autoComplete="email"
+                  required
+                />
+                <i className="fas fa-envelope"></i>
+              </div>
+            </div>
+
+
             <div className="form-group">
               <label htmlFor="endereco">Endereço</label>
               <div className="input-wrapper">
@@ -109,7 +162,7 @@ export default function Cadastro() {
               </div>
             </div>
 
-               
+
             <div className="form-group">
               <label htmlFor="dt_nasc">Data de Nascimento</label>
               <div className="input-wrapper">
@@ -121,10 +174,10 @@ export default function Cadastro() {
                   onChange={(e) => setDt_nasc(e.target.value)}
                   required
                 />
-      
+
               </div>
             </div>
-        
+
 
 
 
@@ -139,7 +192,7 @@ export default function Cadastro() {
                   onChange={(e) => setSenha(e.target.value)}
                   required
                 />
-            
+
               </div>
             </div>
 

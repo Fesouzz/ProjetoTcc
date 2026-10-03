@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/NavBar/Navbar"
-import Footer from "../../components/Footer/Footer"
 import logo from "../../assets/logo-comuna-esportes.png";
 import { useAuth } from "../../context/AuthContext";
 
