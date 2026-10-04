@@ -1,337 +1,178 @@
+/* =========================================================================
+   🔮 FIX DEFINITIVO DA NAVBAR GLOBAL (COMPACTA, ALINHADA E EM LINHA)
+   ========================================================================= */
+
+/* Força a barra de navegação a ocupar o topo inteiro e fixa o fundo */
+.site-header-global {
+  width: 100%;
+  background-color: #141414;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+/* Container flexível que alinha tudo em uma linha horizontal */
 .nav-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 6rem;
-    border-bottom: solid 1px #3d3a3ab3;
-    background-color: var(--bg);
-
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 40px !important;
+  width: 100%;
+  max-height: 80px; /* Garante que a barra nunca fique gigante */
+  box-sizing: border-box;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
+/* Bloco da Logo: Trava o tamanho para não estourar a tela */
 .logo {
-
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
 }
 
 .logo-img {
-    height: 56px;
-    width: auto;
-    max-width: 260px;
-    object-fit: contain;
-    flex-shrink: 0;
+  height: 50px !important; /* 🔥 TRAVA A ALTURA DA LOGO: O segredo para não quebrar */
+  width: auto !important;
+  max-width: 180px !important;
+  object-fit: contain !important;
+  display: block !important;
 }
 
-
-@media (max-width: 480px) {
-    .logo-img {
-        height: 40px;
-    }
-}
-
+/* Container dos links principais (Centralizados no meio) */
 .main-nav {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    font-weight: 600;
-    font-size: 1rem;
+  flex: 1 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .main-nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
+  display: flex !important;
+  flex-direction: row !important; /* Força os links a ficarem lado a lado */
+  align-items: center !important;
+  gap: 30px !important; /* Espaçamento horizontal entre os links */
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-
-.nav-item {
-    margin: 0 15px;
-    padding: 8px 14px;
-    border-radius: 40px;
-    transition: background 0.2s ease;
+.main-nav ul li a {
+  color: #c9d1d9;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.2s;
+  text-decoration: none;
 }
 
-.nav-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+.main-nav ul li a:hover {
+  color: #8a4eff; /* Roxo vibrante no hover */
 }
 
-.nav-link {
-    text-decoration: none;
-
+/* Container do Avatar e Menu do Topo */
+.avatar-navbar-wrapper {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
 }
 
-.nav-right {
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
+.avatar-mini {
+  width: 38px !important;
+  height: 38px !important;
+  background: linear-gradient(135deg, #6b3fa0 0%, #8e5ac9 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  box-sizing: border-box;
 }
 
-
+/* Botão Entrar / Cadastro (Caso deslogado) */
 .btn-cadastro {
-    text-align: center;
-    transition: 0.12s ease;
-    background: linear-gradient(to bottom right,
-            #4d06aa34 15%,
-            rgba(209, 153, 237, 0) 50%);
-    border: 1px solid #ffffff49;
-    color: #dbdcdd;
-    margin: 10px;
-    width: 130px;
-    padding: 6px;
-    box-shadow: rgba(99, 99, 99, 0.163) 0px 2px 8px 1px;
-    border-radius: 20px;
-  
-
+  background: linear-gradient(135deg, #6b3fa0 0%, #8e5ac9 100%);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s;
 }
 
 .btn-cadastro:hover {
-    box-shadow: rgba(99, 99, 99, 0.247) 2px 2px 6px 1px;
-    color: #fff;
-    border: 1px solid #dbdcdd;
-
+  transform: translateY(-1px);
 }
 
-.avatar {
-    margin: 10px;
-    padding: 15px 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #6b3fa0, #8e5ac9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: #fff;
-
+/* =========================================================================
+   👑 SIDEBAR DROPDOWN DA NAVBAR (FLUTUANDO DIREITO)
+   ========================================================================= */
+.navbar-dropdown-menu {
+  position: absolute !important;
+  top: 48px !important;
+  right: 0 !important;
+  background: #0d1117 !important;
+  border: 1px solid #30363d !important;
+  border-radius: 12px !important;
+  width: 210px !important;
+  padding: 8px 0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  z-index: 999999 !important;
+  text-align: left !important;
 }
 
-.mobile-menu {
-    display: none;
-    transition: opacity 0.4s ease;
-    background-color: var(--bg);
+.navbar-dropdown-user-info {
+  padding: 6px 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-.mobile-menu-icon {
-    display: none;
-
+.nav-user-name {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #c9d1d9 !important;
 }
 
-
-.menu-toggle {
-    margin: 5px;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.6rem;
-    cursor: pointer;
+.nav-user-email {
+  font-size: 0.75rem !important;
+  color: #8b949e !important;
 }
 
-
-
-.search-wrap {
-    flex-shrink: 0;
-    display: flex;
-
+.navbar-dropdown-menu hr {
+  border: 0 !important;
+  border-top: 1px solid #21262d !important;
+  margin: 6px 0 !important;
+  width: 100% !important;
 }
 
-.search-icon {
-    border-radius: 40px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    overflow: hidden;
-    background: #222222;
-    transition: width 0.5s;
-
+.navbar-dropdown-menu button {
+  background: none !important;
+  border: none !important;
+  color: #c9d1d9 !important;
+  padding: 10px 16px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  box-sizing: border-box !important;
 }
 
-.search-icon:hover {
-    width: 240px;
+.navbar-dropdown-menu button:hover {
+  background: #161b22 !important;
+  color: #8a4eff !important;
 }
 
-.search-txt {
-    border-radius: 40px;
-    border: none;
-    background: none;
-    outline: none;
-    color: #f0f5fb;
-    font-size: 16px;
-    line-height: 30px;
-    width: 0;
-    transition: .5s;
-    width: 0;
-    padding: 0;
-    min-width: 0;
+.nav-menu-signout {
+  color: #f85149 !important;
 }
 
-.search-icon:hover>.search-txt {
-    background-color: #222222;
-    width: 200px;
-    padding: 0 6px;
-}
-
-.search-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-/*  Responsividade */
-
-@media (max-width: 950px) {
-
-    .nav-bar {
-        display: grid;
-        grid-template-columns: 1fr auto auto;
-        grid-template-rows: auto auto;
-        align-items: center;
-        column-gap: 20px;
-        row-gap: 20px;
-        padding: 1.5rem 2rem;
-    }
-
-
-
-    .main-nav {
-        display: none;
-    }
-
-
-    .logo {
-        grid-column: 1;
-        grid-row: 2;
-        justify-self: start;
-    }
-
-
-    .btn-cadastro{
-        grid-column: 2;
-        grid-row: 2;
-        margin-left: 0;
-        justify-self: end;
-    }
-
-    .avatar {
-        grid-column: 2;
-        grid-row: 2;
-        margin-left: 0;
-        justify-self: end;
-    }
-
-
-
-
-    .mobile-menu-icon {
-        display: block;
-
-        grid-column: 3;
-        grid-row: 2;
-
-        justify-self: end;
-    }
-
-
-
-    .mobile-menu ul {
-        display: flex;
-
-        flex-direction: column;
-
-        text-align: right;
-
-        padding-bottom: 1rem;
-    }
-
-
-    .mobile-menu .nav-item {
-        display: block;
-
-        padding: 1rem;
-    }
-
-
-    .mobile-menu.open {
-        display: block;
-    }
-
-
-    .search-wrap {
-        grid-column: 1 / 4;
-        grid-row: 1;
-
-        justify-self: end;
-        align-self: end;
-
-
-    }
-
-    .search-icon:hover>.search-txt {
-        background-color: #222222;
-        width: 200px;
-        padding: 0 6px;
-    }
-
-
-}
-
-
-@media (max-width: 480px) {
-
-    .logo {
-        grid-column: 1;
-        grid-row: 2;
-        justify-self: start;
-    }
-
-
-    .nav-bar {
-        padding: 1rem;
-        column-gap: 12px;
-    }
-
-
-    .logo-img {
-        height: 40px;
-    }
-
-
-    .avatar {
-        width: 45px;
-        height: 45px;
-    }
-
-
-    .search-icon {
-        width: 40px;
-        height: 40px;
-    }
-
-
-    .menu-toggle {
-        font-size: 1.6rem;
-    }
-
-
-
-
+.nav-menu-signout:hover {
+  background: rgba(248, 81, 73, 0.1) !important;
 }
