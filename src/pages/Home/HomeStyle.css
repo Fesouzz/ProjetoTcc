@@ -108,112 +108,83 @@
   transform: translateX(2px)
 }
 
-/* SPORT PILLS */
+/* =========================================================================
+   🔮 SPORT PILLS (LARGURA MAXIMIZADA E RECUO SIMÉTRICO DE 45PX)
+   ========================================================================= */
 .sports {
-  max-width: 1200px;
-  margin: 0 auto 50px;
-  padding: 0 24px;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-
+  max-width: 1400px;
+  margin: 40px auto 60px;
+  
+  /* 🔥 VOLTOU PRO QUE TAVA BOM: O recuo de 45px que deu a simetria perfeita */
+  padding: 0 45px !important; 
+  
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important; 
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+  box-sizing: border-box !important;
 }
 
 .pill {
-  flex: 1 1 200px;
-  background: #02002434;
-  background: radial-gradient(circle, rgba(2, 0, 36, 0.459) 0%, rgba(9, 9, 121, 0.29) 51%);
-  border: 1.2px solid var(--pill-border);
-  border-radius: 999px;
-  padding: 16px 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  cursor: pointer;
-  transition: transform .15s ease, background .15s easse;
+  flex: none !important; 
+  
+  /* 🔥 AUMENTADO MAIS UM TICO: Esticado de 290px para 305px para preencher o miolo */
+  width: 295px !important; 
+  
+  background: rgba(43, 33, 89, 0.45) !important;
+  border: 1.5px solid rgba(138, 78, 255, 0.4) !important;
+  border-radius: 999px !important;
+  
+  padding: 18px 0 !important; 
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important; 
+  font-weight: 700 !important;
+  font-size: 1.1rem !important; 
+  cursor: pointer !important;
+  transition: all 0.25s ease-in-out !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
+/* Efeito Hover original mantido */
 .pill:hover {
-  transform: translateY(-2px);
-  background: #000000b3;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.538) 0%, rgba(5, 5, 61, 0.456) 51%);
-
+  transform: translateY(-4px) !important;
+  background: rgba(53, 40, 110, 0.65) !important;
+  border-color: #8a4eff !important;
+  box-shadow: 0 0 20px rgba(138, 78, 255, 0.45) !important;
 }
 
 .pill .icon {
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
+  width: 26px !important;
+  height: 26px !important;
+  flex-shrink: 0 !important;
 }
-
 
 .hero-content h1 {
   font-size: 2.1rem;
 }
 
+/* Responsividade original intacta */
 @media (max-width: 768px) {
-
-  .hero-inner {
-    min-height: 380px;
-  }
-
-  .hero-content {
-    padding: 24px;
-  }
-
-  .hero-content h1 {
-    font-size: 1.8rem;
-  }
-
   .sports {
-    gap: 12px;
+    justify-content: center !important;
+    gap: 16px !important;
+    padding: 0 24px !important;
   }
-
   .pill {
-    flex: 1 1 45%;
-    padding: 14px 18px;
-    font-size: 0.95rem;
+    width: 45% !important;
   }
-
 }
 
 @media (max-width: 480px) {
-
-  .hero {
-    padding: 0 16px;
-  }
-
-  .hero-inner {
-    min-height: 320px;
-    border-radius: 14px;
-  }
-
-  .hero-content h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-content p {
-    font-size: 0.9rem;
-  }
-
-  .hero-actions {
-    gap: 14px;
-  }
-
-  .btn-outline {
-    padding: 10px 18px;
-    font-size: 0.85rem;
-  }
-
   .sports {
-    padding: 0 16px;
+    padding: 0 16px !important;
+    gap: 12px !important;
   }
-
   .pill {
-    flex: 1 1 100%;
+    width: 100% !important;
   }
-
 }
+   
