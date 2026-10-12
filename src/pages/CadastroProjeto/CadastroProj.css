@@ -1,5 +1,4 @@
-/* Estilos escopados em .form-container para não afetar o resto do site.
-   Ajuste as cores se o seu CSS original for diferente. */
+/* Estilos escopados em .form-container para não afetar o resto do site. */
 
 .form-container {
     width: 100%;
@@ -66,9 +65,9 @@
 .project-form select:focus,
 .project-form textarea:focus {
     outline: none;
-    border-color: #f5f6f678;
+    border-color: var(--pill-border);
     background-color: rgba(26, 29, 41, 0.9);
-    box-shadow: 0 0 0 2px rgba(183, 201, 230, 0.15);
+    box-shadow: 0 0 0 3px var(--purple-glow);
 }
 
 /* Select: o navegador desenha o menu, então forçamos fundo escuro nas opções */
@@ -77,32 +76,32 @@
     color: #ffffff;
 }
 
-.obrigatorio::after{
+.obrigatorio::after {
   content:" *";
-  color: #7c3aed;
+  color: var(--accent-purple);
 }
 
+/* 🔥 BOTÃO DE SUBMIT ATUALIZADO PARA O ROXO UNIFICADO */
 .btn-submit {
     width: 100%;
     padding: 16px;
     margin-top: 10px;
     border: none;
     border-radius: 12px;
-    background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+    background: var(--purple-grad);
     color: #ffffff;
     font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 15px var(--purple-glow);
     transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+    box-shadow: 0 6px 20px var(--purple-glow);
 }
-
 
 .modalidades-fieldset {
   border: none;
@@ -116,10 +115,11 @@
   font: inherit;
   font-weight: 600;
 }
+
 .checkbox-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content:center;
+  justify-content: center;
   margin-top: 20px;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 8px;
@@ -164,10 +164,11 @@
   border-color: #5a6280;
 }
 
+/* 🔥 CHECKBOX ATIVO CORRIGIDO PARA O GRADIENTE ROXO SUAVE */
 .project-form .checkbox-item input:checked + span {
-  border-color: #422672;
-  background: rgba(106, 93, 128, 0.18);
-  box-shadow: 0 0 0 1px #7c3aed;
+  border-color: var(--pill-border);
+  background: rgba(138, 78, 255, 0.12);
+  box-shadow: 0 0 0 1px var(--accent-purple);
 }
 
 .project-form .checkbox-item input:focus-visible + span {
@@ -175,13 +176,11 @@
   outline-offset: 2px;
 }
 
-
 .campo-ajuda {
   margin: 0 0 10px;
   font-size: 0.85rem;
   opacity: 0.75;
 }
-
 
 .outra-campo input:focus-visible {
   outline-offset: 2px;
@@ -215,7 +214,6 @@
   gap: 6px;
 }
 
-
 [aria-invalid="true"],
 [data-erro="true"] {
   outline: 2px solid #c62828;
@@ -223,15 +221,14 @@
   border-radius: 6px;
 }
 
-
-
+/* 🔥 CHECKBOX NATIVO AJUSTADO PARA O ACCENT-COLOR ROXO */
 .project-form .checkbox-item input[type="checkbox"] {
   width: 18px;
   height: 18px;
   margin: 0;
   padding: 0;               
   flex: 0 0 18px;
-  accent-color: #6906bf;    
+  accent-color: var(--accent-purple);    
 }
 
 .project-form .checkbox-item span {
@@ -240,13 +237,11 @@
   line-height: 1;
 }
 
-
 @media (max-width: 480px) {
   .linha-dupla {
     grid-template-columns: 1fr;
   }
 }
-
 
 @media (max-width: 480px) {
     .form-container {

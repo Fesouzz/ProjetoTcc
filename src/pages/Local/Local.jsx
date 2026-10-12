@@ -16,7 +16,7 @@ const dadosEsportes = [
     telefone: "11 99999-9999",
     horario: "6:00 - 16:00",
     categoria: "Futebol",
-  
+    
   },
   {
     id: 2,

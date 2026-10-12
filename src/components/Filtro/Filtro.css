@@ -1,162 +1,95 @@
-
 .pesquisa-container {
   width: 100%;
-  position: relative;
-  max-width: 1200px;
-  margin: 4% auto 20px auto;
+  max-width: 850px; /* 🔥 IGUALADO: Barra de pesquisa agora tem o mesmo tamanho das modalidades */
+  margin: 4% auto 16px auto;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
-
-.icone-pesquisa {
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #b7b7b7;
-  border-radius: 50%;
-  transform: translateY(-60%);
-  pointer-events: none;
-}
-
-.icone-pesquisa::after {
-  content: "";
-  position: absolute;
-  right: -6px;
-  bottom: -4px;
-  width: 8px;
-  height: 2px;
-  background: #b7b7b7;
-  border-radius: 2px;
-  transform: rotate(45deg);
-}
-
 .input-filtro {
-   
   width: 100%;
-  height: 48px;
-  padding: 0 2px 0 5px;
-  border: 1px solid #333333;
+  height: 48px; /* Voltou para um tamanho intermediário confortável */
+  padding: 0 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   outline: none;
-  background: #1c1c1c;
+  background: rgba(28, 28, 28, 0.6);
   color: #ffffff;
   font-family: inherit;
   font-size: 0.95rem;
   box-sizing: border-box;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
+  text-align: center;
 }
 
-.barra-pesquisa input::placeholder {
-  color: #777777;
-  opacity: 1;
+.input-filtro:focus {
+  border-color: var(--pill-border);
+  background: rgba(28, 28, 28, 0.9);
+  box-shadow: 0 0 0 3px var(--purple-glow);
 }
 
-.barra-pesquisa input:focus {
-  border-color: #4b3f8a;
-  box-shadow: 0 0 0 3px rgba(75, 63, 138, 0.25);
+.input-filtro::placeholder {
+  color: #64748b;
 }
 
-
-
-/* FILTROS */
+/* Barra de navegação com o fundinho escuro */
 .filtros {
-
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  max-width: 990px;
-  min-height: 58px;
-  margin: 20px auto 0;
-  padding: 7px 20px;
-  border-bottom: 1px solid #414141;
-  border-radius: 10px;
+  max-width: 850px; /* 🔥 IGUALADO: Mantém simetria perfeita com o input acima */
+  margin: 20px auto 0 auto;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 30px;
   background: #111111;
-  gap: 12px;
- 
+  gap: 10px;
 }
 
 .filtro {
-  padding: 8px 21px;
-  border: 0;
+  padding: 10px 22px;
+  border: 1px solid transparent;
   border-radius: 999px;
   background: transparent;
-  color: #f1f1f1;
-  font-size: 20px;
+  color: var(--text-dim);
+  font-size: 0.92rem; /* Fonte reajustada para melhor leitura */
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .filtro:hover {
-  background: #272727;
-}
-
-.filtro.ativo {
-  background: #2a2450;
+  background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
 }
 
-.filtro svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+.filtro.ativo {
+
+  background: linear-gradient(to bottom right, #892effb9 10%, rgba(46, 3, 66, 0.26) 30%);
+  background-color: rgba(181, 107, 224, 0.2); 
+  border: 1px solid #ffffff; /* Borda branca idêntica ao botão da Home */
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(46, 142, 255, 0.5); 
 }
 
-
-/* DESTAQUE */
-.destaque {
-  max-width: 1200px;
-  margin: 0 auto 50px;
-  padding: 0 24px;
-}
-
-.destaque h2 {
-  font-size: 1.9rem;
-  font-weight: 800;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #2c2c2c;
-  margin-bottom: 24px;
-}
+ 
 
 
-
-@media (max-width: 700px) {
-  .pesquisa-container {
-    padding-inline: 18px;
-  }
-
+@media (max-width: 768px) {
   .filtros {
     justify-content: flex-start;
     overflow-x: auto;
-    margin-top: 24px;
-    padding-inline: 10px;
     scrollbar-width: none;
+    border-radius: 16px;
   }
-
   .filtros::-webkit-scrollbar {
     display: none;
   }
-
   .filtro {
     flex: 0 0 auto;
-    font-size: 16px;
   }
-}
-
-@media (max-width: 480px) {
-
-  .destaque {
-    padding: 0 16px;
-  }
-
-  .destaque h2 {
-    font-size: 1.5rem;
-  }
-
-
 }

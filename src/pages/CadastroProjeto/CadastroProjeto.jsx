@@ -252,10 +252,10 @@ export default function InscreverProjeto() {
       <form className="project-form" onSubmit={handleSubmit} noValidate>
         <div className="form-group">
           
-          <label htmlFor="projeto"  className="obrigatorio" >Nome do Projeto, Time ou Crew</label>
+          <label htmlFor="projeto"  className="obrigatorio" >Nome do Projeto, Time ou Equipe</label>
 
           <input type="text" id="projeto" name="projeto" maxLength={120}
-            placeholder="Ex: Ritmo e Poesia Crew"
+            placeholder="Ex: MinasFut"
             value={form.projeto}
             onChange={handleChange}
             required

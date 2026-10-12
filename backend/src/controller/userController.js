@@ -74,7 +74,7 @@ const efetuarLogin = async (req, res) => {
                 email: usuario.email,
                 tipo_acesso: usuario.tipo_acesso
             },
-            process.env.JWT_SECRET || "",
+            process.env.JWT_SECRET,
             { expiresIn: "6h" }
         );
 

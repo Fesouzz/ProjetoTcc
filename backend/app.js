@@ -9,7 +9,7 @@ require("dotenv").config({
 
 // 🔥 CASO O SEU ARQUIVO .ENV NÃO SEJA LIDO, ESTA LINHA CONFIGURA A CHAVE DIRETAMENTE NA MEMÓRIA PARA O JWT NÃO DAR ERRO 500:
 if (!process.env.JWT_SECRET) {
-    process.env.JWT_SECRET = "CHAVE_SECRET_TCC_COMUNA";
+    process.env.JWT_SECRET;
 }
 
 const userRoutes = require("./src/routes/routes.js");

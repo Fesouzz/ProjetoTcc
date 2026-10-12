@@ -41,9 +41,9 @@ export default function Perfil() {
           <h1 className="perfil-display-name">{user.nome}</h1>
           
           {ehAdmin ? (
-            <p className="perfil-admin-badge">⚡ ADMINISTRADOR MASTER</p>
+            <p className="perfil-admin-badge">ADMIN</p>
           ) : (
-            <p className="perfil-user-badge">🏅 MEMBRO COMUNIDADE</p>
+            <p className="perfil-user-badge"></p>
           )}
 
           <p className="perfil-display-bio">
@@ -66,14 +66,14 @@ export default function Perfil() {
                 className={`internal-tab-link ${subAba === "dados" ? "active" : ""}`}
                 onClick={() => setSubAba("dados")}
               >
-                👤 Meus Dados
+              Meus Dados
               </button>
               <button 
                 type="button" 
                 className={`internal-tab-link ${subAba === "config" ? "active" : ""}`}
                 onClick={() => setSubAba("config")}
               >
-                ⚙️ Configurações da Conta
+                Configurações da Conta
               </button>
             </>
           ) : (
@@ -84,14 +84,14 @@ export default function Perfil() {
                 className={`internal-tab-link ${subAba === "projetos" ? "active" : ""}`}
                 onClick={() => setSubAba("projetos")}
               >
-                📋 Minhas Propostas
+                Minhas Propostas
               </button>
               <button 
                 type="button" 
                 className={`internal-tab-link ${subAba === "dados" ? "active" : ""}`}
                 onClick={() => setSubAba("dados")}
               >
-                👤 Meus Dados
+                Meus Dados
               </button>
             </>
           )}
@@ -128,7 +128,7 @@ export default function Perfil() {
             {/* Se for usuário comum, mostra o logout aqui embaixo dos dados */}
             {!ehAdmin && (
               <button type="button" className="btn-logout-comum" onClick={logout}>
-                🚪 Sair da Conta (Logout)
+                Sair (Logout)
               </button>
             )}
           </section>
@@ -145,7 +145,6 @@ export default function Perfil() {
               <div className="perfil-projects-stack">
                 {meusProjetos.map((proj) => (
                   <div key={proj.id_proj} className="perfil-project-row-card">
-                    <div className="project-row-icon">🏅</div>
                     <div className="project-row-details">
                       <h3>{proj.local || proj.Local}</h3>
                       <p>
@@ -169,7 +168,7 @@ export default function Perfil() {
               
               <div className="settings-item-row" onClick={() => navigate("/DashBoard")}>
                 <div className="settings-item-text">
-                  <h4>📊 Ir para o Painel Geral</h4>
+                  <h4>Ir para o Painel Geral</h4>
                   <p>Acesse o gerenciamento de propostas de projetos e triagem pendente.</p>
                 </div>
                 <span className="settings-arrow">➔</span>
@@ -177,7 +176,7 @@ export default function Perfil() {
 
               <div className="settings-item-row">
                 <div className="settings-item-text">
-                  <h4>🔒 Criptografia JWT Ativa</h4>
+                  <h4>Criptografia JWT Ativa</h4>
                   <p>Sessão administrativa criptografada e autenticada com sucesso via pool local.</p>
                 </div>
                 <span className="settings-arrow">✔️</span>
@@ -186,7 +185,7 @@ export default function Perfil() {
               <hr className="settings-menu-divider" />
 
               <button type="button" className="btn-menu-logout-danger" onClick={logout}>
-                🔑 Encerrar Sessão Master (Logout)
+                Encerrar Sessão (Logout)
               </button>
 
             </div>

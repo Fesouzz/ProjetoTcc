@@ -1,21 +1,22 @@
-.sem-resultados {
-  color: #b7b7b7;
-  text-align: center;
-  padding: 40px 0;
-  min-height: 400px;
+.locais-page {
+  max-width: 1150px; /* Ajustado sutilmente para abraçar os novos cards encorpados */
+  min-height: 65vh;
+  margin: 0 auto 40px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .lista-cards {
-  max-width: 1200px;
-  min-height: 400px;
-  margin:  20px auto ;
-  padding: 0 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  
-  
-
+  margin-top: 28px;
+  width: 100%;
 }
 
-
+.sem-resultados {
+  color: var(--text-dim);
+  text-align: center;
+  padding: 50px 0;
+  font-size: 1rem;
+}

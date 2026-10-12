@@ -2,15 +2,11 @@ import Navbar from "../../components/NavBar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import imagemHero from "../../assets/WhatsApp Image 2026-03-26 at 23.54.54 (2).jpeg"
 import Karate from "../../assets/Karate.png"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import CardEvento from "../../components/CardEvento/CardEvento"
-import { useAuth } from "../../context/AuthContext"
 import "./HomeStyle.css"
 
 function Home() {
-    const { user } = useAuth();
-    const navigate = useNavigate();
-
     return (
         <>
             <main>
@@ -20,36 +16,20 @@ function Home() {
                             src={imagemHero}
                             alt="Jovem em comunidade à noite"
                         />
-
                         <div className="hero-content">
                             <h1>
                                 COMUNA
                                 <br />
                                 ESPORTES
                             </h1>
-
                             <p>
                                 Fortalecendo o talento periférico através da união, saúde e
                                 cultura urbana. Junte-se ao movimento que transforma comunidades.
                             </p>
-
                             <div className="hero-actions">
-                                {/* Link original com a trava de segurança do alert e texto branco */}
-                                <Link  
-                                    className="btn-outline" 
-                                    to="/cadastroProjeto"
-                                    onClick={(e) => {
-                                        if (!user) {
-                                            e.preventDefault();
-                                            alert("Você precisa estar cadastrado");
-                                            navigate("/Login");
-                                        }
-                                    }}
-                                    style={{ color: "#ffffff" }}
-                                >
+                                <Link className="btn-outline" to="/cadastroProjeto">
                                     Cadastre seu projeto
                                 </Link>
-
                                 <Link to="/Historia" className="link-arrow">
                                     Saiba mais →
                                 </Link>
@@ -60,7 +40,7 @@ function Home() {
 
                 <section className="sports">
                     {/* Futebol */}
-                    <div className="pill">
+                    <Link to="/Futebol" className="pill">
                         <svg
                             className="icon"
                             xmlns="http://w3.org"
@@ -72,26 +52,26 @@ function Home() {
                             />
                         </svg>
                         <span>Futebol</span>
-                    </div>
+                    </Link>
 
                     {/* Basquete */}
-                    <div className="pill">
+                    <Link to="/Basquete" className="pill">
                         <svg
                             className="icon"
                             xmlns="http://w3.org"
                             viewBox="0 0 512 512"
+                            strokeWidth="1.8"
                         >
-                            {/* 🔥 TEXTO INTRUSO REMOVIDO DAQUI DE BAIXO */}
                             <path
                                 fill="#ff4a09"
                                 d="M92.7 58.8l78.4 78.4c18.2-25 28.9-55.9 28.9-89.2 0-14.1-1.9-27.7-5.5-40.6-38 9.4-72.6 27.2-101.8 51.4zM58.8 92.7c-24.2 29.2-42 63.8-51.4 101.8 12.9 3.6 26.5 5.5 40.6 5.5 33.3 0 64.1-10.7 89.2-28.9L58.8 92.7zM256 0c-4.6 0-9.2 .1-13.7 .4 3.7 15.3 5.7 31.2 5.7 47.6 0 46.6-15.9 89.4-42.6 123.4L256 222.1 419.3 58.8C374.9 22.1 318.1 0 256 0zM48 248c-16.4 0-32.4-2-47.6-5.7-.2 4.5-.4 9.1-.4 13.7 0 62.1 22.1 118.9 58.8 163.3L222.1 256 171.4 205.4C137.4 232.1 94.6 248 48 248zm463.6 21.7c.2-4.5 .4-9.1 .4-13.7 0-62.1-22.1-118.9-58.8-163.3L289.9 256 340.6 306.6c34-26.7 76.9-42.6 123.4-42.6 16.4 0 32.4 2 47.6 5.7zm-7.1 47.8c-12.9-3.6-26.5-5.5-40.6-5.5-33.3 0-64.1 10.7-89.2 28.9l78.4 78.4c24.2-29.2 42-63.8 51.4-101.8zM340.9 374.8c-18.2 25-28.9 55.9-28.9 89.2 0 14.1 1.9 27.7 5.5 40.6 38-9.4 72.6-27.2 101.8-51.4l-78.4-78.4zm-34.3-34.3L256 289.9 92.7 453.2c44.3 36.7 101.2 58.8 163.3 58.8 4.6 0 9.2-.1 13.7-.4-3.7-15.3-5.7-31.2-5.7-47.6 0-46.6 15.9-89.4 42.6-123.4z"
                             />
                         </svg>
                         <span>Basquete</span>
-                    </div>
+                    </Link>
 
                     {/* Vôlei */}
-                    <div className="pill">
+                    <Link to="/Volei" className="pill">
                         <svg
                             className="icon"
                             xmlns="http://w3.org"
@@ -103,17 +83,17 @@ function Home() {
                             />
                         </svg>
                         <span>Vôlei</span>
-                    </div>
+                    </Link>
 
                     {/* Artes marciais */}
-                    <div className="pill">
+                    <Link to="/ArtesMarciais" className="pill">
                         <img
                             src={Karate}
                             alt="Artes marciais"
                             className="icon"
                         />
                         <span>Artes marciais</span>
-                    </div>
+                    </Link>
                 </section>
             </main>
         </>
