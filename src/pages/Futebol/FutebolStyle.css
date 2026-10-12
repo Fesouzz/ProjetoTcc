@@ -1,0 +1,191 @@
+.esporte-page {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.hero-esporte {
+  text-align: center;
+  padding: 80px 20px;
+  border-radius: 24px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  background: linear-gradient(to top, rgba(20, 20, 20, 0.95) 10%, rgba(20, 20, 20, 0.4) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-title-esporte {
+  font-size: 2.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.hero-esporte p {
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.page-section-esporte {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .page-section-esporte {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-title-esporte {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #2c2c2c;
+  margin-bottom: 20px;
+}
+
+.group-card-esporte {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.group-card-esporte:hover {
+  border-color: var(--pill-border);
+  transform: translateY(-2px);
+}
+
+.group-card-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.group-emoji-esporte {
+  font-size: 1.8rem;
+  background: #242424;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.group-info-texto h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.group-info-texto p {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+
+.btn-join-esporte {
+  border: 1px solid var(--accent-purple);
+  color: var(--accent-purple);
+  background: transparent;
+  padding: 10px 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-join-esporte:hover {
+  background: var(--accent-purple);
+  color: #141414;
+  box-shadow: 0 0 10px var(--purple-glow);
+}
+
+.match-card-esporte {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+
+.match-date-esporte {
+  color: var(--accent-purple);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.match-teams-esporte {
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.vs-text {
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.match-location-esporte {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.chamada-inscricao-esporte {
+  margin: 60px 0;
+  text-align: center;
+}
+
+.inscricao-box-esporte {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(112, 0, 255, 0.2);
+  border-radius: 16px;
+  padding: 40px 20px;
+  max-width: 650px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.inscricao-box-esporte h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.inscricao-box-esporte p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+.btn-primary-esporte {
+  display: inline-block;
+  background: var(--purple-grad);
+  padding: 14px 35px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 15px var(--purple-glow);
+}
