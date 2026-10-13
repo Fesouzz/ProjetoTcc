@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext"; // 👈 ADICIONE ESSA LINHA AQUI NO TOPO!
 import "./CadastroProj.css";
+
 
 // Enquanto não houver API, usamos esta lista. Os ids batem com a tabela Modalidades.
 // Depois, troque por um fetch: GET /modalidades (apenas aprovada = TRUE).
@@ -188,6 +190,8 @@ export default function InscreverProjeto() {
     return e;
   }
 
+    const { user } = useAuth();
+
   function handleSubmit(ev) {
     ev.preventDefault();
 
@@ -206,32 +210,51 @@ export default function InscreverProjeto() {
     }
 
     // Nomes iguais aos da tabela Projeto. O id_usuario vem da sessão no back-end.
+       // Unifica o horário no formato de texto aceito pelo banco
+    const horarioUnificado = `${form.horaInicio} - ${form.horaFim}`;
+
+    // 🔥 TRATAMENTO COMPLETO: Garante que os IDs sejam enviados como números puros e válidos
+    const idUsuarioValido = user && user.id ? Number(user.id) : 1;
+    
+    // Pega o primeiro ID do array de modalidades. Se for vazio, manda 1 (Futebol/Artes Marciais) por padrão
+    const idModalidadePura = Array.isArray(modalidadesSel) && modalidadesSel.length > 0 
+      ? Number(modalidadesSel[0]) 
+      : Number(modalidadesSel) || 1;
+
     const payload = {
-      nome: form.projeto.trim(),
-      cnpj: limparCNPJ(form.cnpj), // 14 caracteres, sem pontuação
+      cnpj: limparCNPJ(form.cnpj),
       idade_minima: Number(form.idadeMinima),
       idade_maxima: Number(form.idadeMaxima),
       local: form.local.trim(),
-      hora_inicio: form.horaInicio, // "HH:MM"
-      hora_fim: form.horaFim,
-      dias_funcionamento: DIAS_SEMANA.filter((d) => diasSel.includes(d)).join(
-        ", "
-      ),
+      hora_fun: horarioUnificado,
       telefone: form.telefone,
       email: form.email.trim(),
-      descricao: form.descricao.trim(),
-      modalidades: modalidadesSel, // ids do catálogo
-      outras_modalidades: outras, // viram sugestão (aprovada = FALSE)
+      id_user: idUsuarioValido, // Envia o ID numérico puro tratado
+      id_mod: idModalidadePura,  // Envia o ID numérico puro da modalidade (sem ser array)
+      descricao: `Responsável: ${form.projeto.trim()} | Detalhes: ${form.descricao.trim()}`
     };
 
-    // TODO: enviar `payload` para a sua API
-    console.log(payload);
-
-    alert(
-      "Proposta enviada com sucesso! Nossa equipe entrará em contato para validar o cadastro."
-    );
-    navigate("/");
+    // Envio limpo e direto para a rota oficial
+    fetch("http://localhost:3000/api/projetos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+    .then(async (res) => {
+      const respostaData = await res.json();
+      if (res.ok && respostaData.sucesso) {
+        alert("Proposta enviada com sucesso! Ela já está na fila de triagem do administrador.");
+        navigate("/");
+      } else {
+        alert("Erro no servidor: " + (respostaData.mensagem || "Verifique as chaves ou restrições do banco."));
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Erro ao conectar com o servidor. Verifique se o Node está ativo.");
+    });
   }
+
 
   // Atributos para marcar o campo com erro (acessibilidade + scroll)
   const erroProps = (campo) => ({

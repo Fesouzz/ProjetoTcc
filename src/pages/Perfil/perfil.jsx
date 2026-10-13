@@ -9,17 +9,22 @@ export default function Perfil() {
   
   const ehAdmin = user?.tipo_acesso === "admin";
   
-  // 🔥 CORRIGIDO: Se for admin, começa na aba "dados". Se for comum, começa em "projetos"
+  // Se for admin, começa na aba "dados". Se for comum, começa em "projetos"
   const [subAba, setSubAba] = useState(ehAdmin ? "dados" : "projetos");
   const [meusProjetos, setMeusProjetos] = useState([]);
 
-  useEffect(() => {
+   useEffect(() => {
     if (user) {
       fetch("http://localhost:3000/api/projetos")
         .then((res) => res.json())
         .then((data) => {
           if (data.sucesso) {
-            const filtrados = data.dados.filter((p) => p.id === user.id);
+            // 🔥 CONVERSÃO DE SEGURANÇA: Garante que ambos os IDs virem números puros antes da comparação
+            const filtrados = data.dados.filter((p) => {
+              const idProjetoDono = Number(p.id_user || p.id);
+              const idUsuarioSessao = Number(user.id);
+              return idProjetoDono === idUsuarioSessao;
+            });
             setMeusProjetos(filtrados);
           }
         })
@@ -43,7 +48,7 @@ export default function Perfil() {
           {ehAdmin ? (
             <p className="perfil-admin-badge">ADMIN</p>
           ) : (
-            <p className="perfil-user-badge"></p>
+            <p className="perfil-user-badge">MEMBRO COMUNA</p>
           )}
 
           <p className="perfil-display-bio">
@@ -54,13 +59,10 @@ export default function Perfil() {
           </p>
         </section>
 
-        {/* =========================================================================
-           🔥 ABAS CORRIGIDAS: ADMIN VÊ DADOS E CONFIGS. COMUM VÊ PROPOSTAS E DADOS.
-           ========================================================================= */}
+        {/* ABAS DE NAVEGAÇÃO INTERNA */}
         <div className="perfil-internal-tabs">
           {ehAdmin ? (
             <>
-              {/* O que aparece para o ADMINISTRADOR de início */}
               <button 
                 type="button" 
                 className={`internal-tab-link ${subAba === "dados" ? "active" : ""}`}
@@ -78,7 +80,6 @@ export default function Perfil() {
             </>
           ) : (
             <>
-              {/* O que aparece para o USUÁRIO COMUM de início */}
               <button 
                 type="button" 
                 className={`internal-tab-link ${subAba === "projetos" ? "active" : ""}`}
@@ -97,10 +98,6 @@ export default function Perfil() {
           )}
         </div>
 
-        {/* =========================================================================
-           EXIBIÇÃO DOS CONTEÚDOS DE ACORDO COM A ABA SELECIONADA
-           ========================================================================= */}
-        
         {/* ABA: MEUS DADOS */}
         {subAba === "dados" && (
           <section className="perfil-section-block">
@@ -115,8 +112,8 @@ export default function Perfil() {
               </div>
               <div className="data-field-card">
                 <label>Tipo de Conta</label>
-                <p style={{ color: ehAdmin ? "#8a4eff" : "#22c55e", fontWeight: "800" }}>
-                  {ehAdmin ? "ADMINISTRADOR" : "USUÁRIO COMUM"}
+                <p style={{ color: ehAdmin ? "#8a4eff" : "#8a4eff", fontWeight: "800" }}>
+                  {ehAdmin ? "ADMIN" : "USUÁRIO COMUM"}
                 </p>
               </div>
               <div className="data-field-card">
@@ -125,7 +122,6 @@ export default function Perfil() {
               </div>
             </div>
             
-            {/* Se for usuário comum, mostra o logout aqui embaixo dos dados */}
             {!ehAdmin && (
               <button type="button" className="btn-logout-comum" onClick={logout}>
                 Sair (Logout)
@@ -134,7 +130,7 @@ export default function Perfil() {
           </section>
         )}
 
-        {/* ABA: MINHAS PROPOSTAS (Apenas Usuário Comum acessa) */}
+        {/* ABA: MINHAS PROPOSTAS */}
         {subAba === "projetos" && !ehAdmin && (
           <section className="perfil-section-block">
             {meusProjetos.length === 0 ? (
@@ -146,12 +142,13 @@ export default function Perfil() {
                 {meusProjetos.map((proj) => (
                   <div key={proj.id_proj} className="perfil-project-row-card">
                     <div className="project-row-details">
+                      {/* 🔥 CORRIGIDO: Puxa o campo 'local' minúsculo mapeado do banco de forma segura */}
                       <h3>{proj.local || proj.Local}</h3>
                       <p>
                         Status da Triagem:{" "}
-                        <strong className={`status-text-badge status-${proj.status || "pendente"}`}>
+                        <span className={`status-text-badge status-${proj.status || "pendente"}`}>
                           {(proj.status || "pendente").toUpperCase()}
-                        </strong>
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -161,7 +158,7 @@ export default function Perfil() {
           </section>
         )}
 
-        {/* ABA: CONFIGURAÇÕES DA CONTA (Apenas Admin acessa) */}
+        {/* ABA: CONFIGURAÇÕES DA CONTA */}
         {subAba === "config" && ehAdmin && (
           <section className="perfil-section-block">
             <div className="perfil-settings-stack">

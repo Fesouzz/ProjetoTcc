@@ -22,6 +22,22 @@ export default function Dashboard() {
     }
   }
 
+  function alternarStatusInatividade(id) {
+    setGrupos((atual) =>
+      atual.map((g) =>
+        g.id_proj === id
+          ? { ...g, status_projeto: g.status_projeto === "Inativo" ? "Ativo" : "Inativo" }
+          : g
+      )
+    );
+  }
+
+  function excluirGrupoLocal(id) {
+    if (confirm("Tem certeza que deseja desativar este projeto permanentemente?")) {
+      setGrupos((atual) => atual.filter((g) => g.id_proj !== id));
+    }
+  }
+
   async function processarDecisao(id, decisao) {
     try {
       const res = await fetch(`http://localhost:3000/api/projetos/${id}/decisao`, {
@@ -40,6 +56,7 @@ export default function Dashboard() {
     }
   }
 
+    // 🔥 CORRIGIDO: Mapeando os status exatos que estão salvos na tabela do seu MySQL
   const ativos = grupos.filter(g => g.status === "aprovado");
   const pendentes = grupos.filter(g => g.status === "pendente");
 
@@ -74,12 +91,13 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {aba === "ativos" ? (
+                {aba === "ativos" ? (
           <section>
             <h2 className="secao-titulo">Grupos Ativos no Site</h2>
             <div className="table-container">
               <table>
                 <thead>
+                  {/* 💜 Voltou ao cabeçalho original com apenas 3 colunas 💜 */}
                   <tr>
                     <th>Nome do Grupo</th>
                     <th>Modalidade</th>
@@ -103,6 +121,7 @@ export default function Dashboard() {
             </div>
           </section>
         ) : (
+
           <section>
             <h2 className="secao-titulo">Solicitações de Novos Grupos</h2>
             <div className="table-container">
@@ -139,8 +158,7 @@ export default function Dashboard() {
 
       {propostaAberta && (
         <div className="modal-overlay active">
-          <div className="modal-box-premium">
-            {/* 🔥 BOTÃO X DE FECHAR TOTALMENTE REPOSICIONADO */}
+          <div className="modal-box-premium" style={{ maxWidth: "580px" }}>
             <button 
               type="button" 
               className="modal-fechar-x" 
@@ -151,10 +169,53 @@ export default function Dashboard() {
 
             <h2>Analisar Proposta</h2>
             
-            {/* 🔥 CORREÇÃO DA CAIXA BRANCA: Substituído por divs de texto estilizado */}
+            <div className="form-group-static-preview">
+              <label>Responsável pela Proposta</label>
+              <div className="static-text-box" style={{ color: "#8a4eff", fontWeight: "700" }}>
+                {propostaAberta.usuario?.nome || "Morador Comum"}
+              </div>
+            </div>
+
             <div className="form-group-static-preview">
               <label>Nome do Local / Grupo</label>
               <div className="static-text-box">{propostaAberta.local}</div>
+            </div>
+
+            <div style={{ display: "flex", gap: "12px" }}>
+              <div className="form-group-static-preview" style={{ flex: 1 }}>
+                <label>Modalidade</label>
+                <div className="static-text-box">{propostaAberta.modalidade?.nome}</div>
+              </div>
+              <div className="form-group-static-preview" style={{ flex: 1 }}>
+                <label>Horário de Funcionamento</label>
+                <div className="static-text-box">{propostaAberta.hora_fun}</div>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "12px" }}>
+              <div className="form-group-static-preview" style={{ flex: 1 }}>
+                <label>CNPJ Proponente</label>
+                <div className="static-text-box">{propostaAberta.cnpj || "Não informado"}</div>
+              </div>
+              <div className="form-group-static-preview" style={{ flex: 1 }}>
+                <label>Faixa Etária Atendida</label>
+                <div className="static-text-box">
+                  {propostaAberta.idade_minima && propostaAberta.idade_maxima 
+                    ? `${propostaAberta.idade_minima} a ${propostaAberta.idade_maxima} anos` 
+                    : "Não informada"}
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "12px" }}>
+              <div className="form-group-static-preview" style={{ flex: 1 }}>
+                <label>Telefone</label>
+                <div className="static-text-box">{propostaAberta.telefone || "Não informado"}</div>
+              </div>
+              <div className="form-group-static-preview" style={{ flex: 1 }}>
+                <label>E-mail Oficial</label>
+                <div className="static-text-box">{propostaAberta.email || "Não informado"}</div>
+              </div>
             </div>
             
             <div className="form-group-static-preview">
@@ -164,7 +225,13 @@ export default function Dashboard() {
             
             <div className="modal-buttons">
               <button type="button" className="btn-cancel" onClick={() => processarDecisao(propostaAberta.id_proj, "recusar")}>Recusar</button>
-              <button type="button" className="btn-modal-primary" onClick={() => processarDecisao(propostaAberta.id_proj, "aprovar")}>Aceitar</button>
+                            <button 
+                type="button" 
+                className="btn-modal-primary" 
+                onClick={() => processarDecisao(propostaAberta.id_proj, "aprovar")}
+              >
+                Aceitar
+              </button>
             </div>
           </div>
         </div>

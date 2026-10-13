@@ -58,19 +58,19 @@ export default function Navbar() {
                 <hr />
                 
                 <button type="button" onClick={() => { navigate("/Perfil"); setDropdownAberto(false); }}>
-                  <span className="nav-menu-icon">👤</span> Meu Perfil
+                  <span></span> Meu Perfil
                 </button>
 
                 {ehAdmin && (
                   <button type="button" onClick={() => { navigate("/DashBoard"); setDropdownAberto(false); }}>
-                    <span className="nav-menu-icon">📊</span> Painel Admin
+                    <span></span> Painel Admin
                   </button>
                 )}
                 
                 <hr />
                 
                 <button type="button" className="nav-menu-signout" onClick={() => { logout(); setDropdownAberto(false); }}>
-                  <span className="nav-menu-icon">🚪</span> Sair da Conta
+                  <span className="nav-menu-icon"></span> Sair da Conta
                 </button>
               </div>
             )}

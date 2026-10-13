@@ -27,7 +27,7 @@ const listarProjetos = async (req, res) => {
     try {
         const [rows] = await pool.query(`
             SELECT 
-                p.id_proj, p.CNPJ as cnpj, p.idade_minima, p.idade_maxima, p.Local as local, p.hora_fun, p.telefone, p.email, p.descricao, p.status,
+                p.id, p.id_proj, p.CNPJ as cnpj, p.idade_minima, p.idade_maxima, p.Local as local, p.hora_fun, p.telefone, p.email, p.descricao, p.status,
                 u.nome AS nome_responsavel,
                 m.modalidade AS nome_modalidade
             FROM Projeto p
@@ -48,7 +48,8 @@ const listarProjetos = async (req, res) => {
             descricao: row.descricao || "Sem descrição informada.",
             status: row.status, 
             modalidade: { nome: row.nome_modalidade },
-            usuario: { nome: row.nome_responsavel }
+            usuario: { nome: row.nome_responsavel },
+            id_user: row.id
         }));
 
         res.status(200).json({ sucesso: true, total: projetosFormatados.length, dados: projetosFormatados });
